@@ -2,7 +2,7 @@
   hosts: localhost
   gather_facts: no
   vars_files:
-    - vars.json
+    - vars/vars.json
   tasks:
     - name: Security Rule Creation
       include_role:

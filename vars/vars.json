@@ -1,0 +1,10 @@
+{
+  "policy_state": "present",
+  "policy_name": "Allow All Traffic",
+  "src_interface": "port1",
+  "dst_interface": "port2",
+  "src_address": "all",
+  "dst_address": "all",
+  "policy_service": "ALL",
+  "access_token": "f6ds0Hwjkw6qg0s3qkkxmnkNdtgsNw"
+}
