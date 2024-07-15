@@ -6,5 +6,8 @@
   "src_address": "all",
   "dst_address": "all",
   "policy_service": "ALL",
-  "access_token": "f6ds0Hwjkw6qg0s3qkkxmnkNdtgsNw"
+  "access_token": "f6ds0Hwjkw6qg0s3qkkxmnkNdtgsNw",
+  "ansible_httpapi_use_ssl": "no",
+  "ansible_httpapi_validate_certs": "false",
+  "ansible_httpapi_port": "80"
 }

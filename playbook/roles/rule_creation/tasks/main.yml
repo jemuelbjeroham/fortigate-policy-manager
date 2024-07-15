@@ -3,10 +3,14 @@
   fortinet.fortios.fortios_firewall_address:
     vdom: "root"
     access_token: "{{ access_token }}"
+    state: "present"
     firewall_address:
       name: "{{ src_address }}"
   register: src_address_validation
-  ignore_address: yes
+
+- name: Debug src_address_validation
+  debug:
+    var: src_address_validation
 
 - name: Creating source address as it is not present on the firewall
   fortinet.fortios.fortios_firewall_address:
@@ -16,16 +20,20 @@
     firewall_address:
       name: "{{ src_address }}"
       subnet: "{{ src_address_subnet }}"
-    when: src_address_validation.response_code != 0
+  when: src_address_validation.failed
 
-- name: Verifying whether the source address is present or not
+- name: Verifying whether the destination address is present or not
   fortinet.fortios.fortios_firewall_address:
     vdom: "root"
     access_token: "{{ access_token }}"
+    state: "present"
     firewall_address:
       name: "{{ dst_address }}"
   register: dst_address_validation
-  ignore_address: yes
+
+- name: Debug dst_address_validation
+  debug:
+    var: dst_address_validation
 
 - name: Creating destination address as it is not present on the firewall
   fortinet.fortios.fortios_firewall_address:
@@ -33,9 +41,9 @@
     access_token: "{{ access_token }}"
     state: "present"
     firewall_address:
-      name: "{{ src_address }}"
-      subnet: "{{ src_address_subnet }}"
-    when: src_address_validation.response_code != 0
+      name: "{{ dst_address }}"
+      subnet: "{{ dst_address_subnet }}"
+  when: dst_address_validation.failed
 
 - name: Creating Security Policy
   fortinet.fortios.fortios_firewall_policy:
@@ -44,6 +52,7 @@
     access_token: "{{ access_token }}"
     firewall_policy:
       name: "{{ policy_name }}"
+      policyid: "0"
       srcintf:
         - name: "{{ src_interface }}"
       dstintf:

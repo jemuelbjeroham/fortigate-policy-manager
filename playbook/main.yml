@@ -1,8 +1,11 @@
 - name: Fortigate Firewall Security Policy Manager
-  hosts: localhost
+  hosts: ALL
   gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortios
   vars_files:
-    - vars/vars.json
+    - vars.json
   tasks:
     - name: Security Rule Creation
       include_role:
